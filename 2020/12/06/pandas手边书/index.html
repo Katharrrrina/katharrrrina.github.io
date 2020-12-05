@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="提起pandas，我会想到这些搭边的描述：-用来中转数据，读取写入形式多样，不易出错-用来分析数据，新手友好，在anaconda中逐行执行，本当上手-用来展示数据，能简单可视化图表 一开始学的时候，我会比较关注它能够可视化的部分，也就是导入数据，处理数据，生成图表这些但实际使用场景里，其实可视化的部分并不是由pandas这个库提供，而是在前端渲染或许这也是为什么，pandas官网的 cheat s">
+<meta property="og:type" content="article">
+<meta property="og:title" content="pandas手边书">
+<meta property="og:url" content="http://example.com/2020/12/06/pandas%E6%89%8B%E8%BE%B9%E4%B9%A6/index.html">
+<meta property="og:site_name" content="wake up emily">
+<meta property="og:description" content="提起pandas，我会想到这些搭边的描述：-用来中转数据，读取写入形式多样，不易出错-用来分析数据，新手友好，在anaconda中逐行执行，本当上手-用来展示数据，能简单可视化图表 一开始学的时候，我会比较关注它能够可视化的部分，也就是导入数据，处理数据，生成图表这些但实际使用场景里，其实可视化的部分并不是由pandas这个库提供，而是在前端渲染或许这也是为什么，pandas官网的 cheat s">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-12-05T18:21:19.000Z">
+<meta property="article:modified_time" content="2020-12-05T19:10:07.339Z">
+<meta property="article:author" content="em">
+<meta name="twitter:card" content="summary">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>pandas手边书</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/posts/">Writing</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2020/12/03/hello-world/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2020/12/06/pandas%E6%89%8B%E8%BE%B9%E4%B9%A6/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2020/12/06/pandas%E6%89%8B%E8%BE%B9%E4%B9%A6/&text=pandas手边书"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2020/12/06/pandas%E6%89%8B%E8%BE%B9%E4%B9%A6/&title=pandas手边书"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2020/12/06/pandas%E6%89%8B%E8%BE%B9%E4%B9%A6/&is_video=false&description=pandas手边书"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=pandas手边书&body=Check out this article: http://example.com/2020/12/06/pandas%E6%89%8B%E8%BE%B9%E4%B9%A6/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2020/12/06/pandas%E6%89%8B%E8%BE%B9%E4%B9%A6/&title=pandas手边书"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2020/12/06/pandas%E6%89%8B%E8%BE%B9%E4%B9%A6/&title=pandas手边书"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2020/12/06/pandas%E6%89%8B%E8%BE%B9%E4%B9%A6/&title=pandas手边书"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2020/12/06/pandas%E6%89%8B%E8%BE%B9%E4%B9%A6/&title=pandas手边书"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2020/12/06/pandas%E6%89%8B%E8%BE%B9%E4%B9%A6/&name=pandas手边书&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#mysql-pandas-%E5%89%8D%E7%AB%AF%E9%A1%B5%E9%9D%A2%E5%B1%95%E7%A4%BA"><span class="toc-number">1.</span> <span class="toc-text">mysql + pandas + 前端页面展示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A5%E5%8F%A3%E8%B0%83%E7%94%A8-%E7%88%AC%E8%99%AB-pandas-mongo-%E5%AE%9A%E6%97%B6%E9%82%AE%E4%BB%B6"><span class="toc-number">2.</span> <span class="toc-text">接口调用&#x2F;爬虫 + pandas + mongo + 定时邮件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#csv-excel-pandas"><span class="toc-number">3.</span> <span class="toc-text">csv&#x2F;excel + pandas</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1"><span class="toc-number"></span> <span class="toc-text">如何创建df</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11"><span class="toc-number"></span> <span class="toc-text">excel&#x2F;csv读取tip:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2"><span class="toc-number"></span> <span class="toc-text">正确的pandas打开方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3"><span class="toc-number"></span> <span class="toc-text">如何横向&#x2F;纵向 串联&#x2F;裁剪df</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#31"><span class="toc-number"></span> <span class="toc-text">concat</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#32"><span class="toc-number"></span> <span class="toc-text">iloc</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#33"><span class="toc-number"></span> <span class="toc-text">str</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4"><span class="toc-number"></span> <span class="toc-text">如何正确 merge df</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5"><span class="toc-number"></span> <span class="toc-text">如何处理缺失值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6"><span class="toc-number"></span> <span class="toc-text">如何简单计算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#61"><span class="toc-number"></span> <span class="toc-text">clip</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#62"><span class="toc-number"></span> <span class="toc-text">sum</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#63"><span class="toc-number"></span> <span class="toc-text">apply</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7"><span class="toc-number"></span> <span class="toc-text">如何聚合数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#71"><span class="toc-number"></span> <span class="toc-text">group by</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#72"><span class="toc-number"></span> <span class="toc-text">pivot table</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8"><span class="toc-number"></span> <span class="toc-text">如何处理时间</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9"><span class="toc-number"></span> <span class="toc-text">其他细枝末节</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#91"><span class="toc-number"></span> <span class="toc-text">小数点精确度</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#92"><span class="toc-number"></span> <span class="toc-text">百分号</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#93"><span class="toc-number"></span> <span class="toc-text">千位符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#94"><span class="toc-number"></span> <span class="toc-text">文字替换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#95"><span class="toc-number"></span> <span class="toc-text">给df命名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#96"><span class="toc-number"></span> <span class="toc-text">导出excel&#x2F;csv</span></a>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        pandas手边书
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">em</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2020-12-05T18:21:19.000Z" itemprop="datePublished">2020-12-06</time>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>提起pandas，我会想到这些搭边的描述：<br>-用来<strong>中转</strong>数据，读取写入形式多样，不易出错<br>-用来<strong>分析</strong>数据，新手友好，在anaconda中逐行执行，本当上手<br>-用来<strong>展示</strong>数据，能简单可视化图表</p>
+<p>一开始学的时候，我会比较关注它能够可视化的部分，也就是导入数据，处理数据，生成图表这些<br>但实际使用场景里，其实可视化的部分并不是由pandas这个库提供，而是在前端渲染<br>或许这也是为什么，pandas官网的 <a target="_blank" rel="noopener" href="https://pandas.pydata.org/Pandas_Cheat_Sheet.pdf"><strong>cheat sheet</strong></a> 也没有过多展示可视化的部分</p>
+<hr>
+<p>一些我常碰到的业务场景有：</p>
+<ul>
+<li><h3 id="mysql-pandas-前端页面展示"><a href="#mysql-pandas-前端页面展示" class="headerlink" title="mysql + pandas + 前端页面展示"></a>mysql + pandas + 前端页面展示</h3><p>  mysql多表联合查询后，由pandas接收并处理数据，通过api接口将数据交到前端，渲染后生成可视化dashboard</p>
+<p>  其中mysql query也承担一部分数据处理<br>  有时候，如果太多表需要关联，索引又一时无法优化，查询效率较低，<br>  那query简单预处理，把mysql承担的部分数据处理任务交给pandas也是可以的</p>
+<p>  也有时候，query结果高度可用，那pandas无需过多处理，数据格式简单清理验证后即可中转</p>
+</li>
+</ul>
+<ul>
+<li><h3 id="接口调用-爬虫-pandas-mongo-定时邮件"><a href="#接口调用-爬虫-pandas-mongo-定时邮件" class="headerlink" title="接口调用/爬虫 + pandas + mongo + 定时邮件"></a>接口调用/爬虫 + pandas + mongo + 定时邮件</h3><p>  定时脚本，定期从接口获取数据，存储并发送自动邮件<br>  数据不会很脏，因此pandas同样无需过多处理，数据格式简单处理计算后即可中转</p>
+</li>
+</ul>
+<ul>
+<li><h3 id="csv-excel-pandas"><a href="#csv-excel-pandas" class="headerlink" title="csv/excel + pandas"></a>csv/excel + pandas</h3><p>  通常会有比较复杂的业务逻辑，好比是excel宏的替代，批量读取，流水作业，生成业务报表<br>  这部分接下来会结合 <a target="_blank" rel="noopener" href="https://pandas.pydata.org/Pandas_Cheat_Sheet.pdf"><strong>cheat sheet</strong></a>展开</p>
+</li>
+</ul>
+<hr>
+<p>cheat sheet简明扼要地展示了pandas最常用的功能：</p>
+<ul>
+<li>pandas中的df是什么？axis=0,axis=1指什么</li>
+<li><a href="#1">如何创建df</a><ul>
+<li><a href="#11">excel/csv</a></li>
+</ul>
+</li>
+<li><a href="#2">正确的pandas打开方式</a>    <em>（这竟然和如何创建df一样重要！制作者非常希望新手入门的时候就能看到这一条，然后这样去使用pandas</em></li>
+<li><a href="#3">如何横向/纵向 串联/裁剪df</a><ul>
+<li><a href="#31">concat</a></li>
+<li><a href="#32">iloc</a></li>
+<li><a href="#33">str</a></li>
+</ul>
+</li>
+<li><a href="#4">如何正确 merge df</a></li>
+<li><a href="#5">如何处理缺失值</a></li>
+<li><a href="#6">如何简单计算</a><ul>
+<li><a href="#61">clip</a></li>
+<li><a href="#62">sum</a></li>
+<li><a href="#63">apply</a></li>
+</ul>
+</li>
+<li><a href="#7">如何聚合数据</a><ul>
+<li><a href="#71">group by</a></li>
+<li><a href="#72">pivot table</a></li>
+</ul>
+</li>
+<li>如何展示简单图表</li>
+</ul>
+<p>以上这些也许作为初学者会想要逐个击破，但最终会发现，整张表都由于太过常用，一段时间后自然而然地能够熟练运用，并开始学习一些其他功能</p>
+<p>在此之前，我还是按照sheet的框架走一遍，然后提一些没有在sheet中出现，但同样常用的功能，或者小tips</p>
+<ul>
+<li><a href="#8">如何处理时间</a></li>
+<li><a href="#9">其他细枝末节</a><ul>
+<li><a href="#91">小数点精确度</a></li>
+<li><a href="#92">百分号</a></li>
+<li><a href="#93">千位符</a></li>
+<li><a href="#94">文字替换</a></li>
+<li><a href="#95">给df命名</a></li>
+<li><a href="#96">导出excel/csv/mysql</a></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="1">如何创建df</h2>
+
+<p>sheet中df的创建方式也许主要用于创建模拟数据？<br>实际上，如果最终是需要和其他df merge处理，那这样的input相当于把代码写死，缺少机动性，<br>业务上需要更灵活的input，比如excel/csv/mongo等，取决于业务的上游</p>
+<ul>
+<li><h2 id="11">excel/csv读取tip:</h2>
+encoding     |  默认是"utf-8"，数据为中文时若报错，可尝试"gb18030" 
+</li>
+<li><p>excel：<br>usecols  |       可以自定义输入列的index list</p>
+</li>
+<li><p>csv：<br>sep        |     指定分隔符<br>thousands     |  可以处理带千分位的csv数据<br>nrows     |      可以指定输入行数，通常是较小的样本量，测试代码比较方便<br>error_bad_lines | 默认为true，当csv一行数据过长时（有太多分隔符）会报错，设为false时，有问题的行会被忽略掉，不会导入df<br>low_memory  |    一次性读取csv数据，规避同一字段数据类型可能不同的问题<br>chunksize  |     指定分批读取行数，可配合low_memory一同食用，毕竟csv本身很大的话一次性全部读取开销太大</p>
+</li>
+</ul>
+<hr>
+<h2 id="2">正确的pandas打开方式</h2>
+
+<p>链式写法真的相当fancy，也许更偏数据分析的场景下，这样的流式处理既可以优化代码执行效率，又更具有可读性<br>但是没有中间输出过程还是比较硬伤的，如果场景下还是需要依靠中间输出来确认结果的正确性，那最后大概率是不会多花时间单纯为了写得更fancy而改一遍写法了</p>
+<p>当然这个也只是个人取舍</p>
+<p><strong>BUT</strong><br>group by特别适合用链式写法打连招</p>
+<hr>
+<h2 id="3">如何横向/纵向 串联/裁剪df</h2>
+
+<ul>
+<li><h2 id="31">concat</h2>
+
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.concat([df1,df2])</span><br></pre></td></tr></table></figure>
+<p>   concat不止能串联2个df</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">concat_df = pd.DataFrame()</span><br><span class="line"><span class="keyword">for</span> file <span class="keyword">in</span> files:</span><br><span class="line">    filename = <span class="string">r&#x27;&#123;0&#125;/&#123;1&#125;.xls&#x27;</span>.<span class="built_in">format</span>(root.directory,file)</span><br><span class="line">    <span class="built_in">globals</span>()[<span class="string">&#x27;df_%s&#x27;</span> % file] = get_data(file,filename)</span><br><span class="line">    concat_df = pd.concat([concat_df, <span class="built_in">globals</span>()[<span class="string">&#x27;df_%s&#x27;</span> % file]])</span><br></pre></td></tr></table></figure>
+<p>   concat也能只串联一个df</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> chunk <span class="keyword">in</span> pd.read_csv(csv_file, </span><br><span class="line">                         encoding=<span class="string">&#x27;utf-8&#x27;</span>, </span><br><span class="line">                         low_memory=<span class="literal">False</span>, </span><br><span class="line">                         chunksize=<span class="number">50000</span>):</span><br><span class="line">    mylist.append(chunk)</span><br><span class="line">    df = pd.concat(mylist, axis=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><h2 id="32">iloc</h2>
+
+
+</li>
+</ul>
+<p>iloc用于使用index对df横向/竖向切片，逗号前面是横着切，逗号后面是竖着切，可以组合着用</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.iloc[:,[<span class="number">1</span>,<span class="number">2</span>,<span class="number">5</span>]]</span><br></pre></td></tr></table></figure>
+<p>但有时候，求和增列也得靠它</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df[<span class="string">&#x27;Total buzz&#x27;</span>] = df.iloc[:, :].<span class="built_in">sum</span>(axis=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<p>有时候，排序后均匀切片也能用它（也就是一种存在即合理的抽样吧</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">half_df = df.groupby(<span class="string">&#x27;block&#x27;</span>).apply(<span class="keyword">lambda</span> x: x.iloc[:x.block.size:<span class="number">2</span>])</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><h2 id="33">str</h2>
+
+</li>
+</ul>
+<p>str.split</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df[<span class="string">&#x27;new_col&#x27;</span>] = df[<span class="string">&#x27;col&#x27;</span>].<span class="built_in">str</span>.split(<span class="string">r&#x27;/&#x27;</span>,expand=<span class="literal">True</span>)[index]</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df[<span class="string">&#x27;new_col&#x27;</span>] = df[<span class="string">&#x27;col&#x27;</span>].<span class="built_in">str</span>.split(<span class="string">r&#x27;/&#x27;</span>,expand=<span class="literal">True</span>)[index]</span><br></pre></td></tr></table></figure>
+
+<p>str.replace</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df[<span class="string">&#x27;col&#x27;</span>] = df[<span class="string">&#x27;col&#x27;</span>].<span class="built_in">str</span>.replace(old,new)</span><br></pre></td></tr></table></figure>
+
+
+<hr>
+<h2 id="4">如何正确 merge df</h2>
+
+<p>相当于sql query的join关联，没有什么要补充的，sheet很直观很全面</p>
+<hr>
+<h2 id="5">如何处理缺失值</h2>
+
+<p>没有什么要补充的</p>
+<hr>
+<h2 id="6">如何简单计算</h2>
+
+<ul>
+<li><h2 id="61">clip</h2>
+
+</li>
+</ul>
+<p>设置高低区间，在计算中也能用上<br>比如实际可以是负数的值，百分比，业务场景规定必须是正数</p>
+<ul>
+<li><h2 id="62">sum</h2>
+
+</li>
+</ul>
+<p>如上所说，求和增列会需要用到iloc</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df[<span class="string">&#x27;Total buzz&#x27;</span>] = df.iloc[:, :].<span class="built_in">sum</span>(axis=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><h2 id="63">apply</h2>
+
+</li>
+</ul>
+<p>实际上apply是逐行应用的一个func，能做的不止是计算而已</p>
+<p>它可以计算</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df[<span class="string">&#x27;Percentage&#x27;</span>] = df.groupby(<span class="string">&#x27;Name&#x27;</span>)[<span class="string">&#x27;Posts&#x27;</span>].apply(<span class="keyword">lambda</span> x: <span class="number">100</span> * x.astype(<span class="built_in">float</span>)/x.<span class="built_in">sum</span>())</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hash_each_row</span>(<span class="params">key</span>):</span></span><br><span class="line">    <span class="built_in">id</span> = hashlib.sha256(<span class="built_in">str</span>(key).encode(encoding=<span class="string">&#x27;utf-8&#x27;</span>)).hexdigest()</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">id</span></span><br><span class="line">    </span><br><span class="line">df[<span class="string">&#x27;_id&#x27;</span>] = df.apply(<span class="keyword">lambda</span> x: hash_each_row(x[<span class="string">&#x27;key&#x27;</span>]), axis=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<p>可以条件增列(根据range/列表/正则/…)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_valid_rows</span>(<span class="params">row</span>):</span></span><br><span class="line">    <span class="keyword">if</span> row[<span class="string">&#x27;DELETE_FLAG&#x27;</span>] == <span class="number">0</span> <span class="keyword">and</span> row[<span class="string">&#x27;AMOUNT&#x27;</span>] == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;invalid&#x27;</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;valid&#x27;</span></span><br><span class="line"></span><br><span class="line">df[<span class="string">&#x27;state&#x27;</span>] = df.apply(get_valid_rows, axis=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<p>可以拼接多列</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df[<span class="string">&#x27;Model&amp;Percentage&#x27;</span>] = df[[<span class="string">&#x27;Model Name&#x27;</span>, <span class="string">&#x27;Percentage&#x27;</span>]]</span><br><span class="line">    .apply(<span class="keyword">lambda</span> x: <span class="string">&#x27;,&#x27;</span>.join(<span class="built_in">map</span>(<span class="built_in">str</span>, x)), axis=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<p>可以仅对某列format格式</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> <span class="string">&#x27;AMOUNT&#x27;</span> <span class="keyword">in</span> df.columns:</span><br><span class="line">    df[<span class="string">&#x27;AMOUNT&#x27;</span>] = df[<span class="string">&#x27;AMOUNT&#x27;</span>].apply(<span class="keyword">lambda</span> x: <span class="string">&quot;&#123;:,&#125;&quot;</span>.<span class="built_in">format</span>(x))</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">status_id_list = df[<span class="string">&#x27;status_id&#x27;</span>].apply(<span class="built_in">str</span>).tolist()</span><br></pre></td></tr></table></figure>
+
+<p>其他func可以做的它也可以</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df = df.apply(<span class="keyword">lambda</span> x: x.sort_values(by=[<span class="string">&#x27;engagement&#x27;</span>],ascending=<span class="literal">False</span>))</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="7">如何聚合数据</h2>
+
+<ul>
+<li><h2 id="71">group by</h2>
+
+</li>
+</ul>
+<p>十有八九是一套连招，比如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">df.groupby([<span class="string">&#x27;col1&#x27;</span>,<span class="string">&#x27;col2&#x27;</span>,<span class="string">&#x27;col3&#x27;</span>],[as_index=<span class="literal">False</span>],[aggfunc=<span class="string">&quot;sum&quot;</span>])</span><br><span class="line">  .<span class="built_in">sum</span>()/.count()/.cumsum()</span><br><span class="line">  .reset_index()</span><br><span class="line">  .sort_values(<span class="string">&#x27;col1&#x27;</span>, [ascending=<span class="literal">False</span>])</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><h2 id="72">pivot table</h2>
+
+</li>
+</ul>
+<p>升级版group by，用法可以参考这篇 <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/31952948">Pandas | 一文看懂透视表pivot_table</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">df_agg = pd.pivot_table(df, </span><br><span class="line">                        index=[<span class="string">&#x27;col1&#x27;</span>,<span class="string">&#x27;col2&#x27;</span>,<span class="string">&#x27;col3&#x27;</span>], </span><br><span class="line">                        columns=[<span class="string">&#x27;col4&#x27;</span>],</span><br><span class="line">                        values=[<span class="string">&#x27;col5&#x27;</span>],</span><br><span class="line">                        aggfunc=<span class="string">&#x27;sum&#x27;</span>,</span><br><span class="line">                        fill_value=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+<p>也可以相当于excel的转置，完事再来一套组合拳，不过index得注意，转置后列名也需要手动平滑，<br>也许这个实现比较蠢蠢的，但它至少能用</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">df_agg = pd.pivot_table(df, </span><br><span class="line">                        index=[<span class="string">&#x27;col1&#x27;</span>,<span class="string">&#x27;col2&#x27;</span>,<span class="string">&#x27;col3&#x27;</span>], </span><br><span class="line">                        columns=[<span class="string">&#x27;col4&#x27;</span>],</span><br><span class="line">                        values=[<span class="string">&#x27;col5&#x27;</span>],</span><br><span class="line">                        aggfunc=<span class="string">&#x27;sum&#x27;</span>,</span><br><span class="line">                        fill_value=<span class="number">0</span>)</span><br><span class="line">            .fillna(<span class="number">0</span>)</span><br><span class="line">            .reset_index(inplace=<span class="literal">True</span>)</span><br><span class="line">df = pd.DataFrame(df_agg.to_records())</span><br><span class="line"></span><br><span class="line">new_columns = [<span class="string">&#x27;index&#x27;</span>]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> df.columns[<span class="number">1</span>:]:</span><br><span class="line">    tupled_string = <span class="built_in">eval</span>(i)</span><br><span class="line">    new_column = tupled_string[<span class="number">1</span>] + tupled_string[<span class="number">0</span>]</span><br><span class="line">    new_columns.append(new_column)</span><br><span class="line"></span><br><span class="line">df.columns = new_columns</span><br></pre></td></tr></table></figure>
+<h2 id="8">如何处理时间</h2>
+大多数时候timestamp是比较稳妥的数据格式，从timestamp到str格式和其他计算结果均可
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime, timedelta</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">query_start_timestamp = datetime.today() + timedelta(days=-<span class="number">7</span>)</span><br><span class="line">start_date = datetime.strftime(query_start_timestamp,<span class="string">&#x27;%Y-%m-%d&#x27;</span>)</span><br><span class="line"></span><br><span class="line">start_day = pd.Timestamp(<span class="string">&#x27;2020-01-01&#x27;</span>)</span><br><span class="line">now = datetime.now()</span><br><span class="line">last_month_id = <span class="built_in">int</span>(((now - start_day)/np.timedelta64(<span class="number">1</span>, <span class="string">&#x27;M&#x27;</span>)))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="9">其他细枝末节</h2>
+
+<ul>
+<li><h2 id="91">小数点精确度</h2>
+
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df = df[<span class="string">&#x27;col&#x27;</span>].<span class="built_in">map</span>(<span class="keyword">lambda</span> x:(<span class="string">&#x27;%.2f&#x27;</span>)%x)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><h2 id="92">百分号</h2>
+
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df = df[<span class="string">&#x27;col&#x27;</span>].<span class="built_in">map</span>(<span class="keyword">lambda</span> x:<span class="built_in">format</span>(x,<span class="string">&#x27;.2%&#x27;</span>))</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><h2 id="93">千位符</h2>
+
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df = df[<span class="string">&#x27;col&#x27;</span>].<span class="built_in">map</span>(<span class="keyword">lambda</span> x:<span class="built_in">format</span>(x,<span class="string">&#x27;,&#x27;</span>))</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><h2 id="94">文字替换</h2>
+字典形式
+
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df = df.replace(&#123;<span class="string">&#x27;美发&#x27;</span>:<span class="string">&#x27;Hair&#x27;</span>,<span class="string">&#x27;彩妆&#x27;</span>:<span class="string">&#x27;Make Up&#x27;</span>,<span class="string">&#x27;护肤&#x27;</span>:<span class="string">&#x27;Skin Care&#x27;</span>&#125;)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><h2 id="95">给df命名</h2>
+
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.name = <span class="string">&#x27;blablabla&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><h2 id="96">导出excel/csv</h2>
+</li>
+<li><p>excel</p>
+</li>
+</ul>
+<p>比较常规的是，需要在这里确定：</p>
+<p>index是否要导出，<br>列顺序是否需要更改，<br>是否所有列都要导出</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">df.to_excel(root.directory + <span class="string">&#x27;/file_name.xlsx&#x27;</span>,</span><br><span class="line">            index=<span class="literal">False</span>,</span><br><span class="line">            columns=[<span class="string">&#x27;type&#x27;</span>,<span class="string">&#x27;brand_name&#x27;</span>,<span class="string">&#x27;comments&#x27;</span>,<span class="string">&#x27;like&#x27;</span>,<span class="string">&#x27;share&#x27;</span>,<span class="string">&#x27;view&#x27;</span>,<span class="string">&#x27;Engagement&#x27;</span>])</span><br></pre></td></tr></table></figure>
+
+<p>更定制化地做法还有：</p>
+<p>是否在同一个excel的不同sheet更新，<br>是否在同一个sheet追加更新，<br>excel sheet名称是否需要自定义</p>
+<p>多个sheet更新就需要引入openpyxl</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> openpyxl <span class="keyword">import</span> load_workbook</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">write</span>(<span class="params">file,sheetname,df,**kwargs</span>):</span></span><br><span class="line">    book = load_workbook(file)</span><br><span class="line">    writer = pd.ExcelWriter(file, engine=<span class="string">&#x27;openpyxl&#x27;</span>)</span><br><span class="line">    writer.book = book</span><br><span class="line">    writer.sheets = &#123;ws.title: ws <span class="keyword">for</span> ws <span class="keyword">in</span> book.worksheets&#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> sheetname <span class="keyword">not</span> <span class="keyword">in</span> writer.sheets:</span><br><span class="line">        df.to_excel(writer,sheet_name=sheetname, index = <span class="literal">False</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        df.to_excel(writer,sheet_name=sheetname, startrow=writer.sheets[sheetname].max_row + <span class="number">2</span>, index = <span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> <span class="string">&#x27;df2&#x27;</span> <span class="keyword">in</span> kwargs:</span><br><span class="line">        df2 = kwargs.pop(<span class="string">&#x27;df2&#x27;</span>)</span><br><span class="line">        df2.to_excel(writer,sheet_name=sheetname, startrow=writer.sheets[sheetname].max_row + <span class="number">2</span>, index = <span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line">    writer.save()</span><br><span class="line"></span><br><span class="line">sheet_name = df.name</span><br><span class="line">write(file,sheetname,df,df2=df2)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>csv</li>
+</ul>
+<p>默认encoding是utf-8，csv中文导出可设置”gb18030”<br>csv还可以规定float_format，写入模式等</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">df.to_csv(mode=<span class="string">&#x27;a&#x27;</span>,</span><br><span class="line">          columns=[<span class="string">&#x27;Brand&#x27;</span>,<span class="string">&#x27;Division&#x27;</span>,<span class="string">&#x27;NSR&#x27;</span>,<span class="string">&#x27;BUZZ&#x27;</span>],</span><br><span class="line">          float_format=<span class="string">&quot;%.2f&quot;</span>,</span><br><span class="line">          index=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>mysql</li>
+</ul>
+<p>数据中含有表情包时，导出到mysql会报错，需要先设置mysql的编码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">conn = pymysql.connect(host=host, \</span><br><span class="line">                       user=user, \</span><br><span class="line">                       passwd=passwd, \</span><br><span class="line">                       db=db,\</span><br><span class="line">                       port=port,</span><br><span class="line">                       charset=<span class="string">&quot;utf8&quot;</span>)</span><br><span class="line">cur = conn.cursor()</span><br><span class="line">cur.execute(<span class="string">&quot;SET NAMES utf8mb4&quot;</span>)</span><br><span class="line">cur.execute(<span class="string">&quot;SET CHARACTER SET utf8mb4&quot;</span>)</span><br><span class="line">cur.execute(<span class="string">&quot;SET character_set_connection = utf8mb4&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/posts/">Writing</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#mysql-pandas-%E5%89%8D%E7%AB%AF%E9%A1%B5%E9%9D%A2%E5%B1%95%E7%A4%BA"><span class="toc-number">1.</span> <span class="toc-text">mysql + pandas + 前端页面展示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A5%E5%8F%A3%E8%B0%83%E7%94%A8-%E7%88%AC%E8%99%AB-pandas-mongo-%E5%AE%9A%E6%97%B6%E9%82%AE%E4%BB%B6"><span class="toc-number">2.</span> <span class="toc-text">接口调用&#x2F;爬虫 + pandas + mongo + 定时邮件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#csv-excel-pandas"><span class="toc-number">3.</span> <span class="toc-text">csv&#x2F;excel + pandas</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1"><span class="toc-number"></span> <span class="toc-text">如何创建df</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11"><span class="toc-number"></span> <span class="toc-text">excel&#x2F;csv读取tip:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2"><span class="toc-number"></span> <span class="toc-text">正确的pandas打开方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3"><span class="toc-number"></span> <span class="toc-text">如何横向&#x2F;纵向 串联&#x2F;裁剪df</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#31"><span class="toc-number"></span> <span class="toc-text">concat</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#32"><span class="toc-number"></span> <span class="toc-text">iloc</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#33"><span class="toc-number"></span> <span class="toc-text">str</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4"><span class="toc-number"></span> <span class="toc-text">如何正确 merge df</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5"><span class="toc-number"></span> <span class="toc-text">如何处理缺失值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6"><span class="toc-number"></span> <span class="toc-text">如何简单计算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#61"><span class="toc-number"></span> <span class="toc-text">clip</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#62"><span class="toc-number"></span> <span class="toc-text">sum</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#63"><span class="toc-number"></span> <span class="toc-text">apply</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7"><span class="toc-number"></span> <span class="toc-text">如何聚合数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#71"><span class="toc-number"></span> <span class="toc-text">group by</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#72"><span class="toc-number"></span> <span class="toc-text">pivot table</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8"><span class="toc-number"></span> <span class="toc-text">如何处理时间</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9"><span class="toc-number"></span> <span class="toc-text">其他细枝末节</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#91"><span class="toc-number"></span> <span class="toc-text">小数点精确度</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#92"><span class="toc-number"></span> <span class="toc-text">百分号</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#93"><span class="toc-number"></span> <span class="toc-text">千位符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#94"><span class="toc-number"></span> <span class="toc-text">文字替换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#95"><span class="toc-number"></span> <span class="toc-text">给df命名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#96"><span class="toc-number"></span> <span class="toc-text">导出excel&#x2F;csv</span></a>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2020/12/06/pandas%E6%89%8B%E8%BE%B9%E4%B9%A6/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2020/12/06/pandas%E6%89%8B%E8%BE%B9%E4%B9%A6/&text=pandas手边书"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2020/12/06/pandas%E6%89%8B%E8%BE%B9%E4%B9%A6/&title=pandas手边书"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2020/12/06/pandas%E6%89%8B%E8%BE%B9%E4%B9%A6/&is_video=false&description=pandas手边书"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=pandas手边书&body=Check out this article: http://example.com/2020/12/06/pandas%E6%89%8B%E8%BE%B9%E4%B9%A6/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2020/12/06/pandas%E6%89%8B%E8%BE%B9%E4%B9%A6/&title=pandas手边书"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2020/12/06/pandas%E6%89%8B%E8%BE%B9%E4%B9%A6/&title=pandas手边书"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2020/12/06/pandas%E6%89%8B%E8%BE%B9%E4%B9%A6/&title=pandas手边书"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2020/12/06/pandas%E6%89%8B%E8%BE%B9%E4%B9%A6/&title=pandas手边书"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2020/12/06/pandas%E6%89%8B%E8%BE%B9%E4%B9%A6/&name=pandas手边书&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2020 em
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/posts/">Writing</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+
+
+<!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+
+
