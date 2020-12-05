@@ -14,7 +14,7 @@
 <meta property="og:description" content="提起pandas，我会想到这些搭边的描述：-用来中转数据，读取写入形式多样，不易出错-用来分析数据，新手友好，在anaconda中逐行执行，本当上手-用来展示数据，能简单可视化图表 一开始学的时候，我会比较关注它能够可视化的部分，也就是导入数据，处理数据，生成图表这些但实际使用场景里，其实可视化的部分并不是由pandas这个库提供，而是在前端渲染或许这也是为什么，pandas官网的 cheat s">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-12-05T18:21:19.000Z">
-<meta property="article:modified_time" content="2020-12-05T19:10:07.339Z">
+<meta property="article:modified_time" content="2020-12-05T19:20:00.519Z">
 <meta property="article:author" content="em">
 <meta name="twitter:card" content="summary">
     
@@ -137,7 +137,7 @@
 <ul>
 <li><h3 id="mysql-pandas-前端页面展示"><a href="#mysql-pandas-前端页面展示" class="headerlink" title="mysql + pandas + 前端页面展示"></a>mysql + pandas + 前端页面展示</h3><p>  mysql多表联合查询后，由pandas接收并处理数据，通过api接口将数据交到前端，渲染后生成可视化dashboard</p>
 <p>  其中mysql query也承担一部分数据处理<br>  有时候，如果太多表需要关联，索引又一时无法优化，查询效率较低，<br>  那query简单预处理，把mysql承担的部分数据处理任务交给pandas也是可以的</p>
-<p>  也有时候，query结果高度可用，那pandas无需过多处理，数据格式简单清理验证后即可中转</p>
+<p>  也有时候，query结果高度可用，那pandas无需过多处理，数据格式简单<code>清理验证</code>后即可中转</p>
 </li>
 </ul>
 <ul>
@@ -220,9 +220,9 @@ encoding     |  默认是"utf-8"，数据为中文时若报错，可尝试"gb180
 </li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.concat([df1,df2])</span><br></pre></td></tr></table></figure>
-<p>   concat不止能串联2个df</p>
+<p>&emsp;&emsp; &emsp; concat不止能串联2个df</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">concat_df = pd.DataFrame()</span><br><span class="line"><span class="keyword">for</span> file <span class="keyword">in</span> files:</span><br><span class="line">    filename = <span class="string">r&#x27;&#123;0&#125;/&#123;1&#125;.xls&#x27;</span>.<span class="built_in">format</span>(root.directory,file)</span><br><span class="line">    <span class="built_in">globals</span>()[<span class="string">&#x27;df_%s&#x27;</span> % file] = get_data(file,filename)</span><br><span class="line">    concat_df = pd.concat([concat_df, <span class="built_in">globals</span>()[<span class="string">&#x27;df_%s&#x27;</span> % file]])</span><br></pre></td></tr></table></figure>
-<p>   concat也能只串联一个df</p>
+<p>&emsp;&emsp; &emsp;  concat也能只串联一个df</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> chunk <span class="keyword">in</span> pd.read_csv(csv_file, </span><br><span class="line">                         encoding=<span class="string">&#x27;utf-8&#x27;</span>, </span><br><span class="line">                         low_memory=<span class="literal">False</span>, </span><br><span class="line">                         chunksize=<span class="number">50000</span>):</span><br><span class="line">    mylist.append(chunk)</span><br><span class="line">    df = pd.concat(mylist, axis=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
 
 <ul>
@@ -231,11 +231,11 @@ encoding     |  默认是"utf-8"，数据为中文时若报错，可尝试"gb180
 
 </li>
 </ul>
-<p>iloc用于使用index对df横向/竖向切片，逗号前面是横着切，逗号后面是竖着切，可以组合着用</p>
+<p>&emsp;&emsp; &emsp; iloc用于使用index对df横向/竖向切片，逗号前面是横着切，逗号后面是竖着切，可以组合着用</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.iloc[:,[<span class="number">1</span>,<span class="number">2</span>,<span class="number">5</span>]]</span><br></pre></td></tr></table></figure>
-<p>但有时候，求和增列也得靠它</p>
+<p>&emsp;&emsp; &emsp; 但有时候，求和增列也得靠它</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df[<span class="string">&#x27;Total buzz&#x27;</span>] = df.iloc[:, :].<span class="built_in">sum</span>(axis=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-<p>有时候，排序后均匀切片也能用它（也就是一种存在即合理的抽样吧</p>
+<p>&emsp;&emsp; &emsp; 有时候，排序后均匀切片也能用它（也就是一种存在即合理的抽样吧</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">half_df = df.groupby(<span class="string">&#x27;block&#x27;</span>).apply(<span class="keyword">lambda</span> x: x.iloc[:x.block.size:<span class="number">2</span>])</span><br></pre></td></tr></table></figure>
 
 <ul>
@@ -243,24 +243,24 @@ encoding     |  默认是"utf-8"，数据为中文时若报错，可尝试"gb180
 
 </li>
 </ul>
-<p>str.split</p>
+<p>&emsp;&emsp; &emsp; str.split</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df[<span class="string">&#x27;new_col&#x27;</span>] = df[<span class="string">&#x27;col&#x27;</span>].<span class="built_in">str</span>.split(<span class="string">r&#x27;/&#x27;</span>,expand=<span class="literal">True</span>)[index]</span><br></pre></td></tr></table></figure>
 
 
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df[<span class="string">&#x27;new_col&#x27;</span>] = df[<span class="string">&#x27;col&#x27;</span>].<span class="built_in">str</span>.split(<span class="string">r&#x27;/&#x27;</span>,expand=<span class="literal">True</span>)[index]</span><br></pre></td></tr></table></figure>
 
-<p>str.replace</p>
+<p>&emsp;&emsp; &emsp; str.replace</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df[<span class="string">&#x27;col&#x27;</span>] = df[<span class="string">&#x27;col&#x27;</span>].<span class="built_in">str</span>.replace(old,new)</span><br></pre></td></tr></table></figure>
 
 
 <hr>
 <h2 id="4">如何正确 merge df</h2>
+相当于sql query的join关联，没有什么要补充的，sheet很直观很全面
 
-<p>相当于sql query的join关联，没有什么要补充的，sheet很直观很全面</p>
 <hr>
 <h2 id="5">如何处理缺失值</h2>
+没有什么要补充的
 
-<p>没有什么要补充的</p>
 <hr>
 <h2 id="6">如何简单计算</h2>
 
@@ -269,13 +269,13 @@ encoding     |  默认是"utf-8"，数据为中文时若报错，可尝试"gb180
 
 </li>
 </ul>
-<p>设置高低区间，在计算中也能用上<br>比如实际可以是负数的值，百分比，业务场景规定必须是正数</p>
+<p>&emsp;&emsp; &emsp; 设置高低区间，在计算中也能用上<br>&emsp;&emsp; &emsp; 比如实际可以是负数的值，百分比，业务场景规定必须是正数</p>
 <ul>
 <li><h2 id="62">sum</h2>
 
 </li>
 </ul>
-<p>如上所说，求和增列会需要用到iloc</p>
+<p>&emsp;&emsp; &emsp; 如上所说，求和增列会需要用到iloc</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df[<span class="string">&#x27;Total buzz&#x27;</span>] = df.iloc[:, :].<span class="built_in">sum</span>(axis=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
 
 <ul>
@@ -283,24 +283,24 @@ encoding     |  默认是"utf-8"，数据为中文时若报错，可尝试"gb180
 
 </li>
 </ul>
-<p>实际上apply是逐行应用的一个func，能做的不止是计算而已</p>
-<p>它可以计算</p>
+<p>&emsp;&emsp; &emsp; 实际上apply是逐行应用的一个func，能做的不止是计算而已</p>
+<p>&emsp;&emsp; &emsp; 它可以计算</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df[<span class="string">&#x27;Percentage&#x27;</span>] = df.groupby(<span class="string">&#x27;Name&#x27;</span>)[<span class="string">&#x27;Posts&#x27;</span>].apply(<span class="keyword">lambda</span> x: <span class="number">100</span> * x.astype(<span class="built_in">float</span>)/x.<span class="built_in">sum</span>())</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hash_each_row</span>(<span class="params">key</span>):</span></span><br><span class="line">    <span class="built_in">id</span> = hashlib.sha256(<span class="built_in">str</span>(key).encode(encoding=<span class="string">&#x27;utf-8&#x27;</span>)).hexdigest()</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">id</span></span><br><span class="line">    </span><br><span class="line">df[<span class="string">&#x27;_id&#x27;</span>] = df.apply(<span class="keyword">lambda</span> x: hash_each_row(x[<span class="string">&#x27;key&#x27;</span>]), axis=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
 
-<p>可以条件增列(根据range/列表/正则/…)</p>
+<p>&emsp;&emsp; &emsp; 可以条件增列(根据range/列表/正则/…)</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_valid_rows</span>(<span class="params">row</span>):</span></span><br><span class="line">    <span class="keyword">if</span> row[<span class="string">&#x27;DELETE_FLAG&#x27;</span>] == <span class="number">0</span> <span class="keyword">and</span> row[<span class="string">&#x27;AMOUNT&#x27;</span>] == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;invalid&#x27;</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;valid&#x27;</span></span><br><span class="line"></span><br><span class="line">df[<span class="string">&#x27;state&#x27;</span>] = df.apply(get_valid_rows, axis=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
 
-<p>可以拼接多列</p>
+<p>&emsp;&emsp; &emsp; 可以拼接多列</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df[<span class="string">&#x27;Model&amp;Percentage&#x27;</span>] = df[[<span class="string">&#x27;Model Name&#x27;</span>, <span class="string">&#x27;Percentage&#x27;</span>]]</span><br><span class="line">    .apply(<span class="keyword">lambda</span> x: <span class="string">&#x27;,&#x27;</span>.join(<span class="built_in">map</span>(<span class="built_in">str</span>, x)), axis=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
 
-<p>可以仅对某列format格式</p>
+<p>&emsp;&emsp; &emsp; 可以仅对某列format格式</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> <span class="string">&#x27;AMOUNT&#x27;</span> <span class="keyword">in</span> df.columns:</span><br><span class="line">    df[<span class="string">&#x27;AMOUNT&#x27;</span>] = df[<span class="string">&#x27;AMOUNT&#x27;</span>].apply(<span class="keyword">lambda</span> x: <span class="string">&quot;&#123;:,&#125;&quot;</span>.<span class="built_in">format</span>(x))</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">status_id_list = df[<span class="string">&#x27;status_id&#x27;</span>].apply(<span class="built_in">str</span>).tolist()</span><br></pre></td></tr></table></figure>
 
-<p>其他func可以做的它也可以</p>
+<p>&emsp;&emsp; &emsp; 其他func可以做的它也可以</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df = df.apply(<span class="keyword">lambda</span> x: x.sort_values(by=[<span class="string">&#x27;engagement&#x27;</span>],ascending=<span class="literal">False</span>))</span><br></pre></td></tr></table></figure>
 
 <hr>
@@ -311,7 +311,7 @@ encoding     |  默认是"utf-8"，数据为中文时若报错，可尝试"gb180
 
 </li>
 </ul>
-<p>十有八九是一套连招，比如：</p>
+<p>&emsp;&emsp; &emsp; 十有八九是一套连招，比如：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">df.groupby([<span class="string">&#x27;col1&#x27;</span>,<span class="string">&#x27;col2&#x27;</span>,<span class="string">&#x27;col3&#x27;</span>],[as_index=<span class="literal">False</span>],[aggfunc=<span class="string">&quot;sum&quot;</span>])</span><br><span class="line">  .<span class="built_in">sum</span>()/.count()/.cumsum()</span><br><span class="line">  .reset_index()</span><br><span class="line">  .sort_values(<span class="string">&#x27;col1&#x27;</span>, [ascending=<span class="literal">False</span>])</span><br></pre></td></tr></table></figure>
 
 <ul>
@@ -319,10 +319,10 @@ encoding     |  默认是"utf-8"，数据为中文时若报错，可尝试"gb180
 
 </li>
 </ul>
-<p>升级版group by，用法可以参考这篇 <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/31952948">Pandas | 一文看懂透视表pivot_table</a></p>
+<p>&emsp;&emsp; &emsp; 升级版group by，用法可以参考这篇 <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/31952948">Pandas | 一文看懂透视表pivot_table</a></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">df_agg = pd.pivot_table(df, </span><br><span class="line">                        index=[<span class="string">&#x27;col1&#x27;</span>,<span class="string">&#x27;col2&#x27;</span>,<span class="string">&#x27;col3&#x27;</span>], </span><br><span class="line">                        columns=[<span class="string">&#x27;col4&#x27;</span>],</span><br><span class="line">                        values=[<span class="string">&#x27;col5&#x27;</span>],</span><br><span class="line">                        aggfunc=<span class="string">&#x27;sum&#x27;</span>,</span><br><span class="line">                        fill_value=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
 
-<p>也可以相当于excel的转置，完事再来一套组合拳，不过index得注意，转置后列名也需要手动平滑，<br>也许这个实现比较蠢蠢的，但它至少能用</p>
+<p>&emsp;&emsp; &emsp; 也可以相当于excel的转置，完事再来一套组合拳，不过index得注意，转置后列名也需要手动平滑，<br>&emsp;&emsp; &emsp; 也许这个实现比较蠢蠢的，但它至少能用</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">df_agg = pd.pivot_table(df, </span><br><span class="line">                        index=[<span class="string">&#x27;col1&#x27;</span>,<span class="string">&#x27;col2&#x27;</span>,<span class="string">&#x27;col3&#x27;</span>], </span><br><span class="line">                        columns=[<span class="string">&#x27;col4&#x27;</span>],</span><br><span class="line">                        values=[<span class="string">&#x27;col5&#x27;</span>],</span><br><span class="line">                        aggfunc=<span class="string">&#x27;sum&#x27;</span>,</span><br><span class="line">                        fill_value=<span class="number">0</span>)</span><br><span class="line">            .fillna(<span class="number">0</span>)</span><br><span class="line">            .reset_index(inplace=<span class="literal">True</span>)</span><br><span class="line">df = pd.DataFrame(df_agg.to_records())</span><br><span class="line"></span><br><span class="line">new_columns = [<span class="string">&#x27;index&#x27;</span>]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> df.columns[<span class="number">1</span>:]:</span><br><span class="line">    tupled_string = <span class="built_in">eval</span>(i)</span><br><span class="line">    new_column = tupled_string[<span class="number">1</span>] + tupled_string[<span class="number">0</span>]</span><br><span class="line">    new_columns.append(new_column)</span><br><span class="line"></span><br><span class="line">df.columns = new_columns</span><br></pre></td></tr></table></figure>
 <h2 id="8">如何处理时间</h2>
 大多数时候timestamp是比较稳妥的数据格式，从timestamp到str格式和其他计算结果均可
@@ -373,25 +373,25 @@ encoding     |  默认是"utf-8"，数据为中文时若报错，可尝试"gb180
 <li><p>excel</p>
 </li>
 </ul>
-<p>比较常规的是，需要在这里确定：</p>
-<p>index是否要导出，<br>列顺序是否需要更改，<br>是否所有列都要导出</p>
+<p>&emsp;&emsp; &emsp; 比较常规的是，需要在这里确定：</p>
+<p>&emsp;&emsp; &emsp; index是否要导出，<br>&emsp;&emsp; &emsp; 列顺序是否需要更改，<br>&emsp;&emsp; &emsp; 是否所有列都要导出</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">df.to_excel(root.directory + <span class="string">&#x27;/file_name.xlsx&#x27;</span>,</span><br><span class="line">            index=<span class="literal">False</span>,</span><br><span class="line">            columns=[<span class="string">&#x27;type&#x27;</span>,<span class="string">&#x27;brand_name&#x27;</span>,<span class="string">&#x27;comments&#x27;</span>,<span class="string">&#x27;like&#x27;</span>,<span class="string">&#x27;share&#x27;</span>,<span class="string">&#x27;view&#x27;</span>,<span class="string">&#x27;Engagement&#x27;</span>])</span><br></pre></td></tr></table></figure>
 
-<p>更定制化地做法还有：</p>
-<p>是否在同一个excel的不同sheet更新，<br>是否在同一个sheet追加更新，<br>excel sheet名称是否需要自定义</p>
-<p>多个sheet更新就需要引入openpyxl</p>
+<p>&emsp;&emsp; &emsp; 更定制化地做法还有：</p>
+<p>&emsp;&emsp; &emsp; 是否在同一个excel的不同sheet更新，<br>&emsp;&emsp; &emsp; 是否在同一个sheet追加更新，<br>&emsp;&emsp; &emsp; excel sheet名称是否需要自定义</p>
+<p>&emsp;&emsp; &emsp; 多个sheet更新就需要引入openpyxl</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> openpyxl <span class="keyword">import</span> load_workbook</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">write</span>(<span class="params">file,sheetname,df,**kwargs</span>):</span></span><br><span class="line">    book = load_workbook(file)</span><br><span class="line">    writer = pd.ExcelWriter(file, engine=<span class="string">&#x27;openpyxl&#x27;</span>)</span><br><span class="line">    writer.book = book</span><br><span class="line">    writer.sheets = &#123;ws.title: ws <span class="keyword">for</span> ws <span class="keyword">in</span> book.worksheets&#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> sheetname <span class="keyword">not</span> <span class="keyword">in</span> writer.sheets:</span><br><span class="line">        df.to_excel(writer,sheet_name=sheetname, index = <span class="literal">False</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        df.to_excel(writer,sheet_name=sheetname, startrow=writer.sheets[sheetname].max_row + <span class="number">2</span>, index = <span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> <span class="string">&#x27;df2&#x27;</span> <span class="keyword">in</span> kwargs:</span><br><span class="line">        df2 = kwargs.pop(<span class="string">&#x27;df2&#x27;</span>)</span><br><span class="line">        df2.to_excel(writer,sheet_name=sheetname, startrow=writer.sheets[sheetname].max_row + <span class="number">2</span>, index = <span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line">    writer.save()</span><br><span class="line"></span><br><span class="line">sheet_name = df.name</span><br><span class="line">write(file,sheetname,df,df2=df2)</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li>csv</li>
 </ul>
-<p>默认encoding是utf-8，csv中文导出可设置”gb18030”<br>csv还可以规定float_format，写入模式等</p>
+<p>&emsp;&emsp; &emsp; 默认encoding是utf-8，csv中文导出可设置”gb18030”<br>&emsp;&emsp; &emsp; csv还可以规定float_format，写入模式等</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">df.to_csv(mode=<span class="string">&#x27;a&#x27;</span>,</span><br><span class="line">          columns=[<span class="string">&#x27;Brand&#x27;</span>,<span class="string">&#x27;Division&#x27;</span>,<span class="string">&#x27;NSR&#x27;</span>,<span class="string">&#x27;BUZZ&#x27;</span>],</span><br><span class="line">          float_format=<span class="string">&quot;%.2f&quot;</span>,</span><br><span class="line">          index=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li>mysql</li>
 </ul>
-<p>数据中含有表情包时，导出到mysql会报错，需要先设置mysql的编码</p>
+<p>&emsp;&emsp; &emsp; 数据中含有表情包时，导出到mysql会报错，需要先设置mysql的编码</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">conn = pymysql.connect(host=host, \</span><br><span class="line">                       user=user, \</span><br><span class="line">                       passwd=passwd, \</span><br><span class="line">                       db=db,\</span><br><span class="line">                       port=port,</span><br><span class="line">                       charset=<span class="string">&quot;utf8&quot;</span>)</span><br><span class="line">cur = conn.cursor()</span><br><span class="line">cur.execute(<span class="string">&quot;SET NAMES utf8mb4&quot;</span>)</span><br><span class="line">cur.execute(<span class="string">&quot;SET CHARACTER SET utf8mb4&quot;</span>)</span><br><span class="line">cur.execute(<span class="string">&quot;SET character_set_connection = utf8mb4&quot;</span>)</span><br></pre></td></tr></table></figure>
 
 
