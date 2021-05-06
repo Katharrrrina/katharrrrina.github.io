@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="今天来考古Cherno的c++入门视频http:&#x2F;&#x2F;bit.ly&#x2F;2kumpdb &amp;nbsp; 我看的是b站搬运https:&#x2F;&#x2F;www.bilibili.com&#x2F;video&#x2F;BV1VJ411M7WR?p&#x3D;10&amp;spm_id_from&#x3D;pageDriver简介:Cherno是艺电(EA)澳大利亚的游戏引擎工程师，自学生时代起就开始在YouTube做游戏编程视频教学。此系列是C++教程，解释清">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cpp Q&amp;A part1">
+<meta property="og:url" content="http://example.com/2021/05/06/cpp-Q-A-part1/index.html">
+<meta property="og:site_name" content="wake up emily">
+<meta property="og:description" content="今天来考古Cherno的c++入门视频http:&#x2F;&#x2F;bit.ly&#x2F;2kumpdb &amp;nbsp; 我看的是b站搬运https:&#x2F;&#x2F;www.bilibili.com&#x2F;video&#x2F;BV1VJ411M7WR?p&#x3D;10&amp;spm_id_from&#x3D;pageDriver简介:Cherno是艺电(EA)澳大利亚的游戏引擎工程师，自学生时代起就开始在YouTube做游戏编程视频教学。此系列是C++教程，解释清">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-05-06T12:59:27.000Z">
+<meta property="article:modified_time" content="2021-05-06T14:26:54.697Z">
+<meta property="article:author" content="em">
+<meta name="twitter:card" content="summary">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>cpp Q&amp;A part1</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/true" title="wake up emily" type="application/atom+xml" />
+    
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/posts/">Writing</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2020/12/06/pandas%E6%89%8B%E8%BE%B9%E4%B9%A6/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2021/05/06/cpp-Q-A-part1/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2021/05/06/cpp-Q-A-part1/&text=cpp Q&amp;A part1"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2021/05/06/cpp-Q-A-part1/&title=cpp Q&amp;A part1"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2021/05/06/cpp-Q-A-part1/&is_video=false&description=cpp Q&amp;A part1"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=cpp Q&amp;A part1&body=Check out this article: http://example.com/2021/05/06/cpp-Q-A-part1/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2021/05/06/cpp-Q-A-part1/&title=cpp Q&amp;A part1"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2021/05/06/cpp-Q-A-part1/&title=cpp Q&amp;A part1"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2021/05/06/cpp-Q-A-part1/&title=cpp Q&amp;A part1"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2021/05/06/cpp-Q-A-part1/&title=cpp Q&amp;A part1"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2021/05/06/cpp-Q-A-part1/&name=cpp Q&amp;A part1&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1"><span class="toc-number">1.</span> <span class="toc-text">Q: include作用？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2"><span class="toc-number">2.</span> <span class="toc-text">Q: 编译的过程是怎样的？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3"><span class="toc-number">3.</span> <span class="toc-text">Q: 同一个函数签名需要多处引用怎样比较方便？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4"><span class="toc-number">4.</span> <span class="toc-text">Q: c++内置变量的本质区别?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5"><span class="toc-number">5.</span> <span class="toc-text">Q: 计算机用数字表示字符，那为什么字符需要一种单独的数据类型？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6"><span class="toc-number">6.</span> <span class="toc-text">Q: 如何区分float和double?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7"><span class="toc-number">7.</span> <span class="toc-text">Q: 为什么 bool 需要1个字节？不应该是1bit吗？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8"><span class="toc-number">8.</span> <span class="toc-text">Q: functions解决什么问题？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9"><span class="toc-number">9.</span> <span class="toc-text">Q: main函数需要返回值吗？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10"><span class="toc-number">10.</span> <span class="toc-text">Q: 为什么需要引用头文件？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11"><span class="toc-number">11.</span> <span class="toc-text">Q: pragma once VS ifndef?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12"><span class="toc-number">12.</span> <span class="toc-text">Q: include &lt;&gt; or &quot;&quot;?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13"><span class="toc-number">13.</span> <span class="toc-text">Q: 为什么iostream没有文件后缀？</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        cpp Q&amp;A part1
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">em</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2021-05-06T12:59:27.000Z" itemprop="datePublished">2021-05-06</time>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>今天来考古Cherno的c++入门视频<br><a target="_blank" rel="noopener" href="http://bit.ly/2kumpdb">http://bit.ly/2kumpdb</a></p>
+<p>&nbsp;</p>
+<p>我看的是b站搬运<br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1VJ411M7WR?p=10&amp;spm_id_from=pageDriver">https://www.bilibili.com/video/BV1VJ411M7WR?p=10&amp;spm_id_from=pageDriver</a><br>简介:Cherno是艺电(EA)澳大利亚的游戏引擎工程师，自学生时代起就开始在YouTube做游戏编程视频教学。此系列是C++教程，解释清楚，没有废话，剪辑流畅，备课充分，还能学到很多Visual Studio的骚操作，对我当时学习C++帮助很大，强烈推荐。<br>视频:<a target="_blank" rel="noopener" href="http://suo.im/62OLua">http://suo.im/62OLua</a></p>
+<p>&nbsp;</p>
+<p>以下是前10p Q&amp;A概要:</p>
+<ul>
+<li>编译<ul>
+<li><a href="#2">Q: 编译的过程是怎样的？</a></li>
+</ul>
+</li>
+<li>头文件<ul>
+<li><a href="#10">Q: 为什么需要引用头文件？</a></li>
+<li><a href="#1">Q: include作用？</a></li>
+<li><a href="#12">Q: include &lt;&gt; or “”?</a></li>
+<li><a href="#13">Q: 为什么iostream没有文件后缀？</a></li>
+<li><a href="#3">Q: 同一个函数签名需要多处引用怎样比较方便？</a></li>
+<li><a href="#11">Q: pragma once VS ifndef?</a></li>
+</ul>
+</li>
+<li>变量<ul>
+<li><a href="#4">Q: c++内置变量的本质区别?</a></li>
+<li><a href="#5">Q: 计算机用数字表示字符，那为什么字符需要一种单独的数据类型？</a></li>
+<li><a href="#6">Q: 如何区分float和double?</a></li>
+<li><a href="#7">Q: 为什么 bool 需要1个字节？不应该是1bit吗？</a></li>
+</ul>
+</li>
+<li>函数<ul>
+<li><a href="#8">Q: functions解决什么问题？</a></li>
+<li><a href="#9">Q: main函数需要返回值吗？</a></li>
+</ul>
+</li>
+</ul>
+<p>&nbsp;<br>&nbsp;</p>
+<hr>
+<h2 id="1">Q: include作用？</h2>
+
+<p>A: 唯一的作用就是将原文件复制粘贴到该文件</p>
+<hr>
+<h2 id="2">Q: 编译的过程是怎样的？</h2>
+
+<p>A: 编译有两步:</p>
+<p>&emsp;&emsp; &emsp;1. 编译<br>&emsp;&emsp; &emsp;2. 链接</p>
+<p>&emsp;&emsp; &emsp;build = 编译 + 链接<br>&emsp;&emsp; &emsp;编译过程中只要有相应的函数声明就可以通过编译<br>&emsp;&emsp; &emsp;linker会去找对应的函数定义</p>
+<p>&emsp;&emsp; &emsp;如果函数签名error是找不到的会报错<br>&emsp;&emsp; &emsp;包括返回类型 函数名 参数个数和类型等<br>&emsp;&emsp; &emsp;包括两个完全相同的函数签名等</p>
+<p>&emsp;&emsp; &emsp;如果一个函数存在linker error<br>&emsp;&emsp; &emsp;就算在代码中并不实际调用使用该函数的函数<br>&emsp;&emsp; &emsp;但只要函数声明中出现这个函数<br>&emsp;&emsp; &emsp;linker还是会去找它-找不到-报错<br>&emsp;&emsp; &emsp;因为它会假设<br>&emsp;&emsp; &emsp;就算这个文件中没用到这个函数声明<br>&emsp;&emsp; &emsp;其他文件中可能会用到</p>
+<p>&emsp;&emsp; &emsp;如果要告诉linker<br>&emsp;&emsp; &emsp;除此以外没有其他文件声明并定义该函数<br>&emsp;&emsp; &emsp;需要用到static关键字ß</p>
+<p>&emsp;&emsp; &emsp;从内存的角度看<br>&emsp;&emsp; &emsp;static函数的声明周期从程序运行开始到程序结束<br>&emsp;&emsp; &emsp;所以它只能有唯一的声明和定义</p>
+<hr>
+<h2 id="3">Q: 同一个函数签名需要多处引用怎样比较方便？</h2>
+
+<ul>
+<li><p><strong>option1 static</strong><br>  但是这不就意味着函数从始至终都要占内存吗cpp爱好者不能忍（这句是我加的</p>
+</li>
+<li><p><strong>option2 inline</strong><br>  就像include, inline直接做简单函数的原文替换<br>  但是这有风险<br>  inline只是建议编译器说这里可以inline<br>  编译器怎么想怎么做并不绝对</p>
+</li>
+<li><p><strong>option3 头文件和cpp文件分离 &amp;&amp;</strong><br>  ifndef<br>  define<br>  endif<br>  这样多个文件引用函数头文件都会使用同一个函数本体定义也不会重复引用</p>
+</li>
+</ul>
+<hr>
+<h2 id="4">Q: c++内置变量的本质区别?</h2>
+
+<p>A: 大小</p>
+<p>&emsp;&emsp; &emsp;int</p>
+<p>&emsp;&emsp; &emsp;32位和64位都是4个字节 2^(4*8-1)<br>&emsp;&emsp; &emsp;大概正负20亿左右可以表示<br>&emsp;&emsp; &emsp;unsigined int 那就40亿<br>&emsp;&emsp; &emsp;”we have 32 bits to play with”</p>
+<p>&emsp;&emsp; &emsp;char 1<br>&emsp;&emsp; &emsp;short 2<br>&emsp;&emsp; &emsp;int 4<br>&emsp;&emsp; &emsp;long 4<br>&emsp;&emsp; &emsp;long long 8</p>
+<p>&emsp;&emsp; &emsp;float  4<br>&emsp;&emsp; &emsp;double 8</p>
+<p>&emsp;&emsp; &emsp;bool 1</p>
+<p>&emsp;&emsp; &emsp;sizeof(data type)查看类型所需字节</p>
+<hr>
+<h2 id="5">Q: 计算机用数字表示字符，那为什么字符需要一种单独的数据类型？</h2>
+
+<p>A: 可读性，为了告诉电脑，你想看到字符形式的输出，而不是数字<br>&emsp;&emsp; &emsp;A is 65 actually<br>&emsp;&emsp; &emsp;but if character is number and number is character<br>&emsp;&emsp; &emsp;why do we need char to rep character?<br>&emsp;&emsp; &emsp;to tell computer if your input is 65 it will know you want to see A instead of 65</p>
+<hr>
+<h2 id="6">Q: 如何区分float和double?</h2>
+
+<p>A: float 5.5f or 5.5F<br>&emsp;&emsp; &emsp;double 5.5</p>
+<hr>
+<h2 id="7">Q: 为什么 bool 需要1个字节？不应该是1bit吗？</h2>
+
+<p>A: 理论上确实，但是内存寻址最小单位也就是字节了，不能定位到bit<br>&emsp;&emsp; &emsp;但你可以把8个bool存到一个字节里呀</p>
+<hr>
+<h2 id="8">Q: functions解决什么问题？</h2>
+
+<p>A: 主要是为了不写重复代码<br>&emsp;&emsp; &emsp;也很方便定位维护<br>&emsp;&emsp; &emsp;但也不用每一行都准备一个函数<br>&emsp;&emsp; &emsp;首先这没必要<br>&emsp;&emsp; &emsp;还多花时间<br>&emsp;&emsp; &emsp;在函数中来回跳转 压栈弹栈都需要时间<br>&emsp;&emsp; &emsp;inline另说<br>&emsp;&emsp; &emsp;所以当你发现你在复制粘贴代码的时候就是封装function的时候了</p>
+<hr>
+<h2 id="9">Q: main函数需要返回值吗？</h2>
+
+<p>A: ide一般有自动补全，现代c/cpp特点是不写返回值的话默认返回值为0<br>&emsp;&emsp; &emsp;返回值也只在调试模式下有存在感，发布模式无感</p>
+<hr>
+<h2 id="10">Q: 为什么需要引用头文件？</h2>
+
+<p>A: 使用一个未被声明的函数会报错<br>&emsp;&emsp; &emsp;编译器不知道你在用什么函数<br>&emsp;&emsp; &emsp;返回值类型等没有办法检查<br>&emsp;&emsp; &emsp;所以不能帮助分配内存</p>
+<p>&emsp;&emsp; &emsp;函数声明的作用<br>&emsp;&emsp; &emsp;嘿编译器,这个函数是存在的<br>&emsp;&emsp; &emsp;使用声明后的函数可以通过编译</p>
+<p>&emsp;&emsp; &emsp;为了不重复写声明<br>&emsp;&emsp; &emsp;把声明放在头文件里 用include引用<br>&emsp;&emsp; &emsp;include帮忙复制粘贴<br>&emsp;&emsp; &emsp;省去自己复制粘贴</p>
+<hr>
+<h2 id="11">Q: pragma once VS ifndef?</h2>
+
+<p>A: pragma once<br>&emsp;&emsp; &emsp;非标但gcc3.4（2006）后支持 clang msbc都支持<br>&emsp;&emsp; &emsp;比ifndef编译速度快<br>&emsp;&emsp; &emsp;绝大多数从业者已经开始使用pragma once</p>
+<p>&emsp;&emsp; &emsp;<a target="_blank" rel="noopener" href="https://www.cnblogs.com/terrytian88/p/5820159.html">https://www.cnblogs.com/terrytian88/p/5820159.html</a></p>
+<p>&emsp;&emsp; &emsp;<em>#ifndef的方式依赖于宏名字不能冲突，这不光可以保证同一个文件不会被包含多次，也能保证内容完全相同的两个文件不会被不小心同时包含。当然，缺点就是如果不同头文件的宏名不小心”撞车”，可能就会导致头文件明明存在，编译器却硬说找不到声明的状况</em></p>
+<p>&emsp;&emsp; &emsp;<em>#pragma once则由编译器提供保证：同一个文件不会被包含多次。注意这里所说的”同一个文件”是指物理上的一个文件，而不是指内容相同的两个文件。带来的好处 是，你不必再费劲想个宏名了，当然也就不会出现宏名碰撞引发的奇怪问题。对应的缺点就是如果某个头文件有多份拷贝，本方法不能保证他们不被重复包含。当 然，相比宏名碰撞引发的”找不到声明”的问题，重复包含更容易被发现并修正。</em></p>
+<p>&emsp;&emsp; &emsp;<em>#ifndef 有语言支持所以移植性好</em><br>&emsp;&emsp; &emsp;<em>#pragma once 可以避免名字冲突</em></p>
+<hr>
+<h2 id="12">Q: include <> or ""?</h2>
+
+<p>A: 电脑include搜索路径下的文件 &lt;&gt;<br>&emsp;&emsp; &emsp;当前文件相对位置的文件 “”<br>&emsp;&emsp; &emsp;但其实””可以引用所有的 “iostream”也没问题</p>
+<hr>
+<h2 id="13">Q: 为什么iostream没有文件后缀？</h2>
+
+<p>A: 为了区分c和c++标准库<br>&emsp;&emsp; &emsp;c 头文件一般有.h扩展名 eg. stdlib.h</p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/posts/">Writing</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1"><span class="toc-number">1.</span> <span class="toc-text">Q: include作用？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2"><span class="toc-number">2.</span> <span class="toc-text">Q: 编译的过程是怎样的？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3"><span class="toc-number">3.</span> <span class="toc-text">Q: 同一个函数签名需要多处引用怎样比较方便？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4"><span class="toc-number">4.</span> <span class="toc-text">Q: c++内置变量的本质区别?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5"><span class="toc-number">5.</span> <span class="toc-text">Q: 计算机用数字表示字符，那为什么字符需要一种单独的数据类型？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6"><span class="toc-number">6.</span> <span class="toc-text">Q: 如何区分float和double?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7"><span class="toc-number">7.</span> <span class="toc-text">Q: 为什么 bool 需要1个字节？不应该是1bit吗？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8"><span class="toc-number">8.</span> <span class="toc-text">Q: functions解决什么问题？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9"><span class="toc-number">9.</span> <span class="toc-text">Q: main函数需要返回值吗？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10"><span class="toc-number">10.</span> <span class="toc-text">Q: 为什么需要引用头文件？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11"><span class="toc-number">11.</span> <span class="toc-text">Q: pragma once VS ifndef?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12"><span class="toc-number">12.</span> <span class="toc-text">Q: include &lt;&gt; or &quot;&quot;?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13"><span class="toc-number">13.</span> <span class="toc-text">Q: 为什么iostream没有文件后缀？</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2021/05/06/cpp-Q-A-part1/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2021/05/06/cpp-Q-A-part1/&text=cpp Q&amp;A part1"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2021/05/06/cpp-Q-A-part1/&title=cpp Q&amp;A part1"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2021/05/06/cpp-Q-A-part1/&is_video=false&description=cpp Q&amp;A part1"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=cpp Q&amp;A part1&body=Check out this article: http://example.com/2021/05/06/cpp-Q-A-part1/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2021/05/06/cpp-Q-A-part1/&title=cpp Q&amp;A part1"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2021/05/06/cpp-Q-A-part1/&title=cpp Q&amp;A part1"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2021/05/06/cpp-Q-A-part1/&title=cpp Q&amp;A part1"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2021/05/06/cpp-Q-A-part1/&title=cpp Q&amp;A part1"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2021/05/06/cpp-Q-A-part1/&name=cpp Q&amp;A part1&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2021 em
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/posts/">Writing</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+
+
+<!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+    <!-- Google Analytics -->
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', '271518478', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+
+
