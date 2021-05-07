@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="继续考古Cherno的c++入门视频http:&#x2F;&#x2F;bit.ly&#x2F;2kumpdb &amp;nbsp; 不知道还能忍这位语速惊人的话痨老哥多久，先更着有些地方会补充一些侯捷老师那边的观点完结撒花后看能不能系统性地总结一下 &amp;nbsp; 我看的是b站搬运https:&#x2F;&#x2F;www.bilibili.com&#x2F;video&#x2F;BV1VJ411M7WR?p&#x3D;10&amp;spm_id_from&#x3D;pageDriver简介:C">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cpp Q&amp;A part2">
+<meta property="og:url" content="http://example.com/2021/05/07/cpp-Q-A-part2/index.html">
+<meta property="og:site_name" content="wake up emily">
+<meta property="og:description" content="继续考古Cherno的c++入门视频http:&#x2F;&#x2F;bit.ly&#x2F;2kumpdb &amp;nbsp; 不知道还能忍这位语速惊人的话痨老哥多久，先更着有些地方会补充一些侯捷老师那边的观点完结撒花后看能不能系统性地总结一下 &amp;nbsp; 我看的是b站搬运https:&#x2F;&#x2F;www.bilibili.com&#x2F;video&#x2F;BV1VJ411M7WR?p&#x3D;10&amp;spm_id_from&#x3D;pageDriver简介:C">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-05-07T13:41:51.000Z">
+<meta property="article:modified_time" content="2021-05-07T13:51:47.392Z">
+<meta property="article:author" content="em">
+<meta name="twitter:card" content="summary">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>cpp Q&amp;A part2</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/true" title="wake up emily" type="application/atom+xml" />
+    
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/posts/">Writing</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2021/05/06/cpp-Q-A-part1/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2021/05/07/cpp-Q-A-part2/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2021/05/07/cpp-Q-A-part2/&text=cpp Q&amp;A part2"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2021/05/07/cpp-Q-A-part2/&title=cpp Q&amp;A part2"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2021/05/07/cpp-Q-A-part2/&is_video=false&description=cpp Q&amp;A part2"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=cpp Q&amp;A part2&body=Check out this article: http://example.com/2021/05/07/cpp-Q-A-part2/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2021/05/07/cpp-Q-A-part2/&title=cpp Q&amp;A part2"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2021/05/07/cpp-Q-A-part2/&title=cpp Q&amp;A part2"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2021/05/07/cpp-Q-A-part2/&title=cpp Q&amp;A part2"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2021/05/07/cpp-Q-A-part2/&title=cpp Q&amp;A part2"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2021/05/07/cpp-Q-A-part2/&name=cpp Q&amp;A part2&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1"><span class="toc-number">1.</span> <span class="toc-text">什么是constant folding 常量折叠？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2"><span class="toc-number">2.</span> <span class="toc-text">如何偷看编译器优化的工作？（提示：汇编语言中间文件）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3"><span class="toc-number">3.</span> <span class="toc-text">Q: if var is true VS if var?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4"><span class="toc-number">4.</span> <span class="toc-text">Q: for括号里的三个语句分别是什么?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#25"><span class="toc-number">5.</span> <span class="toc-text">Q: for括号里常见的i是什么意思?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5"><span class="toc-number">6.</span> <span class="toc-text">Q: for VS while? 什么时候用哪个？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6"><span class="toc-number">7.</span> <span class="toc-text">Q: while VS do...while?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7"><span class="toc-number">8.</span> <span class="toc-text">Q: continue, break, return 分别是什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8"><span class="toc-number">9.</span> <span class="toc-text">Q: 指针具体是什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9"><span class="toc-number">10.</span> <span class="toc-text">Q: 指针为什么需要指定数据类型？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#24"><span class="toc-number">11.</span> <span class="toc-text">Q: if p 是什么意思？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#26"><span class="toc-number">12.</span> <span class="toc-text">Q: 指针分别有哪几种状态？（from cpp primer）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10"><span class="toc-number">13.</span> <span class="toc-text">Q: 引用具体是什么？和指针的相似之处在于？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#27"><span class="toc-number">14.</span> <span class="toc-text">Q: 引用占内存吗？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11"><span class="toc-number">15.</span> <span class="toc-text">Q: 引用和指针的区别是？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12"><span class="toc-number">16.</span> <span class="toc-text">Q: &amp;符号是什么意思?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13"><span class="toc-number">17.</span> <span class="toc-text">Q: T&amp; r VS T &amp;r?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#14"><span class="toc-number">18.</span> <span class="toc-text">Q: c++支持面向对象吗？还有呢？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#15"><span class="toc-number">19.</span> <span class="toc-text">Q: 不使用类影响什么？类的引入方便了什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#16"><span class="toc-number">20.</span> <span class="toc-text">Q: struct VS class? 区别是？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#28"><span class="toc-number">21.</span> <span class="toc-text">Q: struct VS class? 区别不大的话，有必要存在两个关键字吗？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#17"><span class="toc-number">22.</span> <span class="toc-text">Q: static的生命周期和作用域？（提示：内存分配&amp;linker）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#18"><span class="toc-number">23.</span> <span class="toc-text">Q: 使用上static有什么特别之处？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#20"><span class="toc-number">24.</span> <span class="toc-text">Q: static有哪些调用方式？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#21"><span class="toc-number">25.</span> <span class="toc-text">Q: 类的static成员函数能访问到类的非static成员变量吗？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#22"><span class="toc-number">26.</span> <span class="toc-text">Q: 局部静态变量有什么好处？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#23"><span class="toc-number">27.</span> <span class="toc-text">Q: 用局部静态变量实现单例有什么好处？</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        cpp Q&amp;A part2
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">em</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2021-05-07T13:41:51.000Z" itemprop="datePublished">2021-05-07</time>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>继续考古Cherno的c++入门视频<br><a target="_blank" rel="noopener" href="http://bit.ly/2kumpdb">http://bit.ly/2kumpdb</a></p>
+<p>&nbsp;</p>
+<p>不知道还能忍这位语速惊人的话痨老哥多久，先更着<br>有些地方会补充一些侯捷老师那边的观点<br>完结撒花后看能不能系统性地总结一下</p>
+<p>&nbsp;</p>
+<p><em>我看的是b站搬运</em><br><em><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1VJ411M7WR?p=10&amp;spm_id_from=pageDriver">https://www.bilibili.com/video/BV1VJ411M7WR?p=10&amp;spm_id_from=pageDriver</a></em><br><em>简介:Cherno是艺电(EA)澳大利亚的游戏引擎工程师，自学生时代起就开始在YouTube做游戏编程视频教学。此系列是C++教程，解释清楚，没有废话，剪辑流畅，备课充分，还能学到很多Visual Studio的骚操作，对我当时学习C++帮助很大，强烈推荐。</em><br><em>视频:<a target="_blank" rel="noopener" href="http://suo.im/62OLua">http://suo.im/62OLua</a></em></p>
+<p>&nbsp;</p>
+<p>以下是11p-23p Q&amp;A概要:</p>
+<ul>
+<li>编译优化<ul>
+<li><a href="#1">Q: 什么是constant folding 常量折叠？</a></li>
+<li><a href="#2">Q: 如何偷看编译器优化的工作？（提示：汇编语言中间文件）</a></li>
+</ul>
+</li>
+<li>if<ul>
+<li><a href="#3">Q: if var is true VS if var?</a></li>
+</ul>
+</li>
+<li>loops<ul>
+<li><a href="#4">Q: for括号里的三个语句分别是什么?</a></li>
+<li><a href="#25">Q: for括号里常见的i是什么意思?</a></li>
+<li><a href="#5">Q: for VS while? 什么时候用哪个？</a></li>
+<li><a href="#6">Q: while VS do…while?</a></li>
+</ul>
+</li>
+<li>control flow<ul>
+<li><a href="#7">Q: continue, break, return 分别是什么？</a></li>
+</ul>
+</li>
+<li>指针<ul>
+<li><a href="#8">Q: 指针具体是什么？</a></li>
+<li><a href="#9">Q: 指针为什么需要指定数据类型？</a></li>
+<li><a href="#24">Q: if p 是什么意思？</a></li>
+<li><a href="#26">Q: 指针分别有哪几种状态？（from cpp primer）</a></li>
+</ul>
+</li>
+<li>引用<ul>
+<li><a href="#10">Q: 引用具体是什么？和指针的相似之处在于？</a></li>
+<li><a href="#27">Q: 引用占内存吗？？</a></li>
+<li><a href="#11">Q: 引用和指针的区别是？</a></li>
+<li><a href="#12">Q: &amp;符号是什么意思?</a></li>
+<li><a href="#13">Q: T&amp; r VS T &amp;r?</a></li>
+</ul>
+</li>
+<li>类<ul>
+<li><a href="#14">Q: c++支持面向对象吗？还有呢？</a></li>
+<li><a href="#15">Q: 不使用类影响什么？类的引入方便了什么？</a></li>
+<li><a href="#16">Q: struct VS class? 区别是？</a></li>
+<li><a href="#28">Q: struct VS class? 区别不大的话，有必要存在两个关键字吗？</a></li>
+</ul>
+</li>
+<li>static<ul>
+<li><a href="#17">Q: static的生命周期和作用域？（提示：内存分配&amp;linker）</a></li>
+<li><a href="#19">Q: 使用上static有什么特别之处？</a></li>
+<li><a href="#20">Q: static有哪些调用方式？</a></li>
+<li><a href="#21">Q: 类的static成员函数能访问到类的非static成员变量吗？</a></li>
+<li><a href="#22">Q: 局部静态变量有什么好处？</a></li>
+<li><a href="#23">Q: 用局部静态变量实现单例有什么好处？</a></li>
+</ul>
+</li>
+</ul>
+<p>&nbsp;<br>&nbsp;</p>
+<hr>
+<h2 id="1">什么是constant folding 常量折叠？</h2>
+
+<p>A: 在编译期就查找并计算常量表达式，而不是在运行时再对其进行计算，包括if判断，帮助剪枝编译文件</p>
+<hr>
+<h2 id="2">如何偷看编译器优化的工作？（提示：汇编语言中间文件）</h2>
+
+<p>A: 可以 g++ -S your_file.cpp 生成后缀.s的汇编语言中间文件<br>&emsp;&emsp; &emsp;-o[0-3] 可以指定优化程度 0无优化 2大部分优化<br>&emsp;&emsp; &emsp;cherno友情提示：不想被编译器虐就看无优化版本哦</p>
+<hr>
+<h2 id="3">Q: if var is true VS if var?</h2>
+
+<p>A: ALWAYS if var<br>&emsp;（其他语言应该也是如此…?</p>
+<hr>
+<h2 id="4">Q: for括号里的三个语句分别是什么?</h2>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (initializer,condition,expression) &#123;</span><br><span class="line">    statement</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp; &emsp;第一个语句 <strong>initializer</strong> 表示 循环启动前初始化变量并赋值<br>&emsp;&emsp; &emsp;第二个语句 <strong>condition</strong> 表示 循环结束的条件<br>&emsp;&emsp; &emsp;第三个语句 <strong>expression</strong> 表示 循环中每次执行完 <strong>statement</strong> 会执行的语句<br>&emsp;&emsp; &emsp;（可以是单条的语句 也可以是复合语句）<br>&emsp;&emsp; &emsp;友情提示：for循环结束后 initializer 变量生命就结束了</p>
+<hr>
+<h2 id="25">Q: for括号里常见的i是什么意思?</h2>
+
+<p>A: 没有什么意思哦<br>&emsp;&emsp; &emsp;int i<br>&emsp;&emsp; &emsp;index i<br>&emsp;&emsp; &emsp;随便 都可以 也用不着记哦</p>
+<hr>
+<h2 id="5">Q: for VS while? 什么时候用哪个？</h2>
+
+<p>A: cherno觉得看个人风格<br>&emsp;&emsp; &emsp;看是否有新的变量</p>
+<p>&emsp;&emsp; &emsp;比如游戏中会有这么个变量值<br>&emsp;&emsp; &emsp;如果为真 游戏循环就会持续进行<br>&emsp;&emsp; &emsp;保持对环境和人物的渲染<br>&emsp;&emsp; &emsp;这种讲法就很结合实际嘛</p>
+<p>&emsp;&emsp; &emsp;但是理解上我更喜欢侯捷老师的版本<br>&emsp;&emsp; &emsp;“看循环次数是否已知”</p>
+<p>&emsp;&emsp; &emsp;对游戏来说<br>&emsp;&emsp; &emsp;什么时候停止循环是一个外界因素<br>&emsp;&emsp; &emsp;玩家发出信号循环停止<br>&emsp;&emsp; &emsp;发信时间是未知的<br>&emsp;&emsp; &emsp;循环次数是未知的<br>&emsp;&emsp; &emsp;所以应该用while</p>
+<hr>
+<h2 id="6">Q: while VS do...while?</h2>
+
+<p>A: do…while保证至少执行一次statement</p>
+<hr>
+<h2 id="7">Q: continue, break, return 分别是什么？</h2>
+
+<p>A: <strong>continue</strong> to next iteration (do nothing in this iteration)<br>&emsp;&emsp; &emsp;<strong>break</strong> out of the loop<br>&emsp;&emsp; &emsp;<strong>return</strong> out of the function </p>
+<hr>
+<h2 id="8">Q: 指针具体是什么？</h2>
+
+<p>A: 指针是一个四字节的数字 存储一个内存地址<br>&emsp;&emsp; &emsp;启动程序或脚本时<br>&emsp;&emsp; &emsp;整个程序会被加载到内存中<br>&emsp;&emsp; &emsp;交互<br>&emsp;&emsp; &emsp;变量获取<br>&emsp;&emsp; &emsp;指针用来管理内存</p>
+<hr>
+<h2 id="9">Q: 指针为什么需要指定数据类型？</h2>
+
+<p>A: 存储一个已存在变量的内存地址并不需要数据类型<br>&emsp;&emsp; &emsp;主要是为了读取内存地址的时候知道按什么大小（数据类型）来读<br>&emsp;&emsp; &emsp;包括解引用赋值等 都需要知道如何读取</p>
+<hr>
+<h2 id="24">Q: if p 是什么意思？</h2>
+
+<p>A: 任何非空指针都会返回true</p>
+<hr>
+<h2 id="26">Q: 指针分别有哪几种状态？（from cpp primer）</h2>
+
+<ul>
+<li>指向一个对象</li>
+<li>指向紧邻对象所占空间的下一个位置</li>
+<li>空指针</li>
+<li>无效指针 试图拷贝或访问无效指针都会引发错误 编译器不会检查此类错误 未定义的行为</li>
+</ul>
+<hr>
+<h2 id="10">Q: 引用具体是什么？和指针的相似之处在于？</h2>
+
+<p>A: 引用是已存在变量的别称<br>&emsp;&emsp; &emsp;是美化的指针<br>&emsp;&emsp; &emsp;查看引用变量看到的是绑定对象的内存地址和大小</p>
+<hr>
+<h2 id="27">Q: 引用占内存吗？</h2>
+
+<p>A: 不占<br>&emsp;&emsp; &emsp;按照”引用是美化的指针”这个说法应该是要占<br>&emsp;&emsp; &emsp;但是编译器在编译期间优化了代码<br>&emsp;&emsp; &emsp;把本该分配内存的变量指针优化为变量别名了<br>&emsp;&emsp; &emsp;确实不占内存</p>
+<hr>
+<h2 id="11">Q: 引用和指针的区别是？</h2>
+
+<ul>
+<li>引用必须初始化 和具有初始值的对象绑定在一起</li>
+<li>引用不是对象 只能绑定一次 必须有初始值 指针可以绑定多次</li>
+</ul>
+<hr>
+<h2 id="12">Q: &符号是什么意思?</h2>
+
+<ul>
+<li>在变量前表示取地址 &amp;val</li>
+<li>在类型后表示引用类型限定符 （左值引用）</li>
+</ul>
+<hr>
+<h2 id="13">Q: T& r VS T &r?</h2>
+
+<p>A: 没有区别<br>&emsp;&emsp; &emsp;c++ primer表示T&amp; r/ T &amp;r 都一样 &amp;只是限定符<br>&emsp;&emsp; &emsp;cherno表示T&amp; is a type<br>&emsp;&emsp; &emsp;虽然他这么说没毛病<br>&emsp;&emsp; &emsp;但是因为对指针来说还是有点区别的</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">T* p1,p2;</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp; &emsp;比如这种写法 语法合规 但看上去会误以为本条定义中的所有变量都是T型指针 其实p2是T型对象 不是指针<br>&emsp;&emsp; &emsp;引用需要另外记就有点烦<br>&emsp;&emsp; &emsp;看个人习惯吧</p>
+<hr>
+<h2 id="14">Q: c++支持面向对象吗？还有呢？</h2>
+
+<p>A: 面向对象 基于对象 面向过程 泛型编程 全都行</p>
+<hr>
+<h2 id="15">Q: 不使用类影响什么？类的引入方便了什么？</h2>
+
+<p>A: 对非派生类对象来说 使用类更容易维护<br>&emsp;&emsp; &emsp;派生类就更是如此了<br>&emsp;&emsp; &emsp;理论上啥也没有也能写 比如c</p>
+<hr>
+<h2 id="16">Q: struct VS class? 区别是？</h2>
+
+<p>A: 唯一的区别在于<br>&emsp;&emsp; &emsp;使用struct定义的类和派生类默认是公有继承<br>&emsp;&emsp; &emsp;使用class定义的类和派生类默认是私有继承<br>&emsp;&emsp; &emsp;</p>
+<hr>
+<h2 id="28">Q: struct VS class? 区别不大的话，有必要存在两个关键字吗？</h2>
+
+<p>A: struct的bg一说是c的兼容性<br>&emsp;&emsp; &emsp;但是cherno嗤之以鼻<br>&emsp;&emsp; &emsp;一个手动define全文替换就能搞定的事情<br>&emsp;&emsp; &emsp;不能这么小题大做吧<br>&emsp;&emsp; &emsp;实在太没有区别了</p>
+<p>&emsp;&emsp; &emsp;anyway<br>&emsp;&emsp; &emsp;关于struct和class的实际使用<br>&emsp;&emsp; &emsp;每个程序员都不一样<br>&emsp;&emsp; &emsp;（因为圣经就说它俩除了那个唯一的区别就一样！一样！）</p>
+<p>&emsp;&emsp; &emsp;cherno分享了他的实操版本<br>&emsp;&emsp; &emsp;which他说很多业内人士也是这么做的<br>&emsp;&emsp; &emsp;cherno认为的struct就是单纯的数据结构<br>&emsp;&emsp; &emsp;比如处理plain old data (pod)会用struct<br>&emsp;&emsp; &emsp;比如向量类<br>&emsp;&emsp; &emsp;只有变量和简单方法 会用struct</p>
+<p>&emsp;&emsp; &emsp;另外cherno不用struct处理派生类<br>&emsp;&emsp; &emsp;如果有继承层次<br>&emsp;&emsp; &emsp;他会用class<br>&emsp;&emsp; &emsp;（可能用struct会有一些意想不到的小坑）</p>
+<hr>
+<h2 id="17">Q: static的生命周期和作用域？（提示：内存分配&linker）</h2>
+
+<p>A: static变量和函数存在于整个程序运行期间<br>&emsp;&emsp; &emsp;内存分开放的 全局仅有一份数据<br>&emsp;&emsp; &emsp;linker不会在这个编译单元(单个cpp文件编译后的obj)外找定义<br>&emsp;&emsp; &emsp;这点上extern 相反 多个文件share变量时可以用</p>
+<hr>
+<h2 id="18">Q: 使用上static有什么特别之处？</h2>
+
+<p>A: 使用时需要在类外另行声明</p>
+<hr>
+<h2 id="20">Q: static有哪些调用方式？</h2>
+
+<ul>
+<li>类名::方法名</li>
+<li>通过类实例调用实例方法</li>
+</ul>
+<hr>
+<h2 id="21">Q: 类的static成员函数能访问到类的非static成员变量吗？</h2>
+
+<p>A: 不能<br>&emsp;&emsp; &emsp;内存分开放的<br>&emsp;&emsp; &emsp;写成非成员函数 在类外传参数时传具体的类实例才可以</p>
+<hr>
+<h2 id="22">Q: 局部静态变量有什么好处？</h2>
+
+<p>A: 外面的世界很危险<br>&emsp;&emsp; &emsp;比如 在函数外定义变量 在函数内递增变量值<br>&emsp;&emsp; &emsp;这很危险<br>&emsp;&emsp; &emsp;万一在外部不知道哪里这个变量被改了<br>&emsp;&emsp; &emsp;函数的输出结果会达不到预期<br>&emsp;&emsp; &emsp;可以在函数内定义static 局部静态变量<br>&emsp;&emsp; &emsp;外面没有人来改<br>&emsp;&emsp; &emsp;里面也只会生成一份变量来改</p>
+<hr>
+<h2 id="23">Q: 用局部静态变量实现单例有什么好处？</h2>
+
+<p>A: 使用局部static变量的好处除了以上<br>&emsp;&emsp; &emsp;还有两个<br>&emsp;&emsp; &emsp;代码简洁 在类外不需要另行声明使用<br>&emsp;&emsp; &emsp;仅在调用时才会生成唯一实例 懒汉模式 省内存（这是侯捷老师的关注点）</p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/posts/">Writing</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1"><span class="toc-number">1.</span> <span class="toc-text">什么是constant folding 常量折叠？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2"><span class="toc-number">2.</span> <span class="toc-text">如何偷看编译器优化的工作？（提示：汇编语言中间文件）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3"><span class="toc-number">3.</span> <span class="toc-text">Q: if var is true VS if var?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4"><span class="toc-number">4.</span> <span class="toc-text">Q: for括号里的三个语句分别是什么?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#25"><span class="toc-number">5.</span> <span class="toc-text">Q: for括号里常见的i是什么意思?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5"><span class="toc-number">6.</span> <span class="toc-text">Q: for VS while? 什么时候用哪个？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6"><span class="toc-number">7.</span> <span class="toc-text">Q: while VS do...while?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7"><span class="toc-number">8.</span> <span class="toc-text">Q: continue, break, return 分别是什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8"><span class="toc-number">9.</span> <span class="toc-text">Q: 指针具体是什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9"><span class="toc-number">10.</span> <span class="toc-text">Q: 指针为什么需要指定数据类型？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#24"><span class="toc-number">11.</span> <span class="toc-text">Q: if p 是什么意思？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#26"><span class="toc-number">12.</span> <span class="toc-text">Q: 指针分别有哪几种状态？（from cpp primer）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10"><span class="toc-number">13.</span> <span class="toc-text">Q: 引用具体是什么？和指针的相似之处在于？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#27"><span class="toc-number">14.</span> <span class="toc-text">Q: 引用占内存吗？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11"><span class="toc-number">15.</span> <span class="toc-text">Q: 引用和指针的区别是？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12"><span class="toc-number">16.</span> <span class="toc-text">Q: &amp;符号是什么意思?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13"><span class="toc-number">17.</span> <span class="toc-text">Q: T&amp; r VS T &amp;r?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#14"><span class="toc-number">18.</span> <span class="toc-text">Q: c++支持面向对象吗？还有呢？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#15"><span class="toc-number">19.</span> <span class="toc-text">Q: 不使用类影响什么？类的引入方便了什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#16"><span class="toc-number">20.</span> <span class="toc-text">Q: struct VS class? 区别是？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#28"><span class="toc-number">21.</span> <span class="toc-text">Q: struct VS class? 区别不大的话，有必要存在两个关键字吗？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#17"><span class="toc-number">22.</span> <span class="toc-text">Q: static的生命周期和作用域？（提示：内存分配&amp;linker）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#18"><span class="toc-number">23.</span> <span class="toc-text">Q: 使用上static有什么特别之处？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#20"><span class="toc-number">24.</span> <span class="toc-text">Q: static有哪些调用方式？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#21"><span class="toc-number">25.</span> <span class="toc-text">Q: 类的static成员函数能访问到类的非static成员变量吗？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#22"><span class="toc-number">26.</span> <span class="toc-text">Q: 局部静态变量有什么好处？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#23"><span class="toc-number">27.</span> <span class="toc-text">Q: 用局部静态变量实现单例有什么好处？</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2021/05/07/cpp-Q-A-part2/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2021/05/07/cpp-Q-A-part2/&text=cpp Q&amp;A part2"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2021/05/07/cpp-Q-A-part2/&title=cpp Q&amp;A part2"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2021/05/07/cpp-Q-A-part2/&is_video=false&description=cpp Q&amp;A part2"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=cpp Q&amp;A part2&body=Check out this article: http://example.com/2021/05/07/cpp-Q-A-part2/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2021/05/07/cpp-Q-A-part2/&title=cpp Q&amp;A part2"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2021/05/07/cpp-Q-A-part2/&title=cpp Q&amp;A part2"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2021/05/07/cpp-Q-A-part2/&title=cpp Q&amp;A part2"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2021/05/07/cpp-Q-A-part2/&title=cpp Q&amp;A part2"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2021/05/07/cpp-Q-A-part2/&name=cpp Q&amp;A part2&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2021 em
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/posts/">Writing</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+
+
+<!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+
+    <!-- Google Analytics -->
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', '271518478', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+
+
